@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .container{
+      width: 80%;
+      max-height: 500px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Probando libreria JChart</h1>
+
+  <div class="container">
+    {{ bar_chart.as_html }}
+  </div>
+
+  <!-- Carga asincrona JChart -->
+  <div class="container">
+    {% load jchart %}
+    {% render_chart 'line_chart' %}
+  </div>
+
+  <br>
+
+  <div class="container">
+    <canvas class="chart" id="unique-chart-id" width="400" height="200"></canvas>
+  </div>
+
+  <script type="text/javascript">
+    window.addEventListener("DOMContentLoaded", function() {
+        $.get('/charts/line_chart/', function(configuration) {
+            var ctx = document.getElementById("unique-chart-id").getContext("2d");
+            console.log(configuration)
+            new Chart(ctx, configuration);
+        });
+    });
+  </script>
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</body>
+</html>
