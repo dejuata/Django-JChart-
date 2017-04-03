@@ -3,6 +3,9 @@ from jchart.config import Axes, DataSet, rgba
 
 
 class BarChart(Chart):
+	"""
+		Esta clase genera un grafico de barras
+	"""
     chart_type = 'bar'
 
     def get_labels(self, **kwargs):
